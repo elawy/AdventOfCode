@@ -22,7 +22,7 @@ public class CalorieCounting {
         int thirdMost = 0;
         int tempCalories = 0;
 
-
+        // read out of .txt file 
         try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
 
@@ -40,6 +40,7 @@ public class CalorieCounting {
                     }    
                     else if (tempCalories > thirdMost) thirdMost = tempCalories;
                     tempCalories=0;
+                    
                 } else {
                     tempCalories += Integer.parseInt( line.trim() );
                 }
