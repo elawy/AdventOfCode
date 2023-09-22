@@ -19,7 +19,7 @@ public class RucksackReorganization {
 
             while ((line = br.readLine()) != null) {
                 char item = findItemType(divideInput(line));
-                sumOfPriorities = findPrioritieValue(item);
+                sumOfPriorities += findPrioritieValue(item);
             }
             return sumOfPriorities;       
         } catch (IOException e) {
@@ -29,19 +29,33 @@ public class RucksackReorganization {
     }
 
     public static String[] divideInput(String input){
-        String rucksack[] = new String[2];
         // split Input in half
+        int mid = input.length()/2;
+        String[] rucksack = {input.substring(0, mid), input.substring(mid)};
         return rucksack;
     }
 
     public static char findItemType(String[] rucksack){
-        char item;
         //find item that  exist in both elements
-        return item;
+        for (int i = 0; i < rucksack[0].length(); i++) {
+            if (rucksack[1].contains(rucksack[0].charAt(i)+"")) {
+                return rucksack[0].charAt(i);
+            }
+        }
+        return '0';
     }
 
     public static int findPrioritieValue(char item){
 
+        String alphabetLow = "abcdefghijklmnopqrstuvwxyz";
+        String alphabetUpper = alphabetLow.toUpperCase();
+        String prioritie = alphabetLow + alphabetUpper;
+        for (int i = 0; i < prioritie.length(); i++) {
+            if (prioritie.charAt(i) == item) {
+                return i+1;
+            }
+        }
+        return 0;
     }
 
 }
