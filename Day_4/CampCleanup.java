@@ -8,19 +8,18 @@ public class CampCleanup {
     static String filePath = "Day_4/input.txt";
 
     public static void main(String[] args){
-        System.out.println(getResult_part1());
+        System.out.println(getResult());
         //System.out.println(getResults_part2());
     }
 
-
-/*--------------------------------Part 1------------------------------------ */
-    public static int getResult_part1(){
+    public static int getResult(){
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))){
             String line;
             int result = 0;
 
             while ( (line=br.readLine()) != null) {
-                if ( isPartOf( convertInput(line) ) )
+                //if ( isPartOf_1( convertInput(line) ) )
+                if ( isPartOf_2( convertInput(line) ) )
                     result++;
             }
             return result;
@@ -41,8 +40,8 @@ public class CampCleanup {
         
         return startEnd;
     }
-
-    public static boolean isPartOf(int[][] id){
+/*--------------------------------Part 1------------------------------------ */
+    public static boolean isPartOf_1(int[][] id){
 
         if ( ( (id[0][0] >= id[1][0]) && (id[0][1] <= id[1][1]) )
                 || ( (id[0][0] <= id[1][0]) && (id[0][1] >= id[1][1]) ) ) {
@@ -53,18 +52,16 @@ public class CampCleanup {
     }
 
 /*--------------------------------Part 2---------------------------- */
-    public static int getResult_part2(){
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))){
-            String line;
-            int result = 0;
-
-            while ( (line=br.readLine()) != null) {
-
-            }
-            return result;
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static boolean isPartOf_2(int[][] id){
+        //Example: { {34,82}, {33,81} }     1-94, 3-96
+        // die 33 liegt zwischen dem ersten bereich oder die 82
+        if ( ( (id[0][0] >= id[1][0]) && (id[0][0] <= id[1][1]) )   // 34 between 33 and 81
+                || ( (id[0][1] >= id[1][0]) && (id[0][1] <= id[1][1]) ) // 82 between 33 and 81
+                || ( (id[1][0] >= id[0][0]) && (id[1][0] <= id[0][1]) ) // 33 between 34 and 82
+                || ( (id[1][1] >= id[0][0]) && (id[1][1] <= id[0][1]) ) ){ // 81 between 34 and 82
+            return true;
+        }else{
+            return false;
         }
-        return 0;
     }
 }
