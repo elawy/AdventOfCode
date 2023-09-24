@@ -42,9 +42,9 @@ public class CampCleanup {
     }
 /*--------------------------------Part 1------------------------------------ */
     public static boolean isPartOf_1(int[][] id){
-
-        if ( ( (id[0][0] >= id[1][0]) && (id[0][1] <= id[1][1]) )
-                || ( (id[0][0] <= id[1][0]) && (id[0][1] >= id[1][1]) ) ) {
+        //Example: { {34,82}, {33,81} }
+        if ( ( (id[0][0] >= id[1][0]) && (id[0][1] <= id[1][1]) )           // 34>=33 && 82<=81
+                || ( (id[0][0] <= id[1][0]) && (id[0][1] >= id[1][1]) ) ) { // 34<=33 && 82>=81
             return true;
         }else{
             return false;
@@ -53,12 +53,11 @@ public class CampCleanup {
 
 /*--------------------------------Part 2---------------------------- */
     public static boolean isPartOf_2(int[][] id){
-        //Example: { {34,82}, {33,81} }     1-94, 3-96
-        // die 33 liegt zwischen dem ersten bereich oder die 82
-        if ( ( (id[0][0] >= id[1][0]) && (id[0][0] <= id[1][1]) )   // 34 between 33 and 81
-                || ( (id[0][1] >= id[1][0]) && (id[0][1] <= id[1][1]) ) // 82 between 33 and 81
-                || ( (id[1][0] >= id[0][0]) && (id[1][0] <= id[0][1]) ) // 33 between 34 and 82
-                || ( (id[1][1] >= id[0][0]) && (id[1][1] <= id[0][1]) ) ){ // 81 between 34 and 82
+        //Example: { {34,82}, {33,81} }
+        if ( ( (id[0][0] >= id[1][0]) && (id[0][0] <= id[1][1]) )           // 34 between 33 and 81
+                || ( (id[0][1] >= id[1][0]) && (id[0][1] <= id[1][1]) )     // 82 between 33 and 81
+                || ( (id[1][0] >= id[0][0]) && (id[1][0] <= id[0][1]) )     // 33 between 34 and 82
+                || ( (id[1][1] >= id[0][0]) && (id[1][1] <= id[0][1]) ) ){  // 81 between 34 and 82
             return true;
         }else{
             return false;
