@@ -7,18 +7,17 @@ import java.util.ArrayList;
 
 public class SupplyStacks {
     static String filePath = "Day_5/input.txt";
+    ArrayList<Character>[] stackOfCrates;
 
-    public static void main(String[] args){
-        System.out.println(getResult());
-        //System.out.println(getResults_part2());
+    public SupplyStacks(){
+
     }
 
-    public static String getResult(){
+    public String getResult(){
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))){
             String line;
             ArrayList <String> stackInString = new ArrayList<String>();
-            String result = "";
-
+            
             // read stacks of marked crates
             while (!(line=br.readLine()).isEmpty()) {
                 stackInString.add(line);
@@ -27,11 +26,12 @@ public class SupplyStacks {
 
             // read rearrangement procedure
             while ((line=br.readLine()) != null) {
-                
+
+                rearrangementProcedure(convertInputProcedure(line));
             }
 
 
-            return result;
+            return readResultFromStack();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,7 +40,7 @@ public class SupplyStacks {
 
     /*--------------------------------Part 1------------------------------------ */
 
-    public static ArrayList<Character>[] convertInput(ArrayList<String> stackInString){
+    public void convertInput(ArrayList<String> stackInString){
        // initializing Array of ArrayList
         ArrayList<Character>[] stackOfCrates = new ArrayList[stackInString.size()];
         for (int i = 0; i < stackInString.size(); i++) {
@@ -54,19 +54,25 @@ public class SupplyStacks {
                     stackOfCrates[j].add(creates);
                 }
             }
-            
         }
-        return stackOfCrates;
     }
 
-    public static void rearrangementProcedure(ArrayList<Character>[] stackOfCreates){
+    public int[] convertInputProcedure(String line){
+        int[] procedureStep = new int[3];
+        //...procedure
+        return procedureStep;
+    }
+
+    public void rearrangementProcedure(int[] orders){
 
     }
 
-    public static String getResult(ArrayList<Character>[] stackOfCreates){
+    public String readResultFromStack(){
         String result = "";
+        //...
         return result;
     }
+
 /*--------------------------------Part 2------------------------------------ */
 
 }
