@@ -22,7 +22,7 @@ public class SupplyStacks {
             while (!(line=br.readLine()).isEmpty()) {
                 stackInString.add(line);
             }
-            convertInput(stackInString);
+            convertInputStack(stackInString);
 
             // read rearrangement procedure
             while ((line=br.readLine()) != null) {
@@ -40,36 +40,69 @@ public class SupplyStacks {
 
     /*--------------------------------Part 1------------------------------------ */
 
-    public void convertInput(ArrayList<String> stackInString){
-       // initializing Array of ArrayList
-        ArrayList<Character>[] stackOfCrates = new ArrayList[stackInString.size()];
-        for (int i = 0; i < stackInString.size(); i++) {
-            stackOfCrates[i] = new ArrayList<Character>();
-        }
+    public void convertInputStack(ArrayList<String> stackInLines){
 
-        for (int i = stackInString.size()-1; i >= 0; i--) {     // each line of the input.txt
-            for (int k = 0, j = 0; k < stackOfCrates.length; k+=4, j++) {
-                char creates = stackInString.get(i).charAt(k);
+        //how many stacks are there?
+        int lastIndex = stackInLines.size()-1;
+        String lastLine= stackInLines.get(lastIndex).trim();
+        stackInLines.remove(lastIndex);
+        int numOfStacks = Integer.parseInt(lastLine.substring(lastLine.length() - 1));
+
+        // initializing Array of ArrayList
+        this.stackOfCrates = new ArrayList[numOfStacks];
+        for (int i = 0; i < stackInLines.size(); i++) {
+            this.stackOfCrates[i] = new ArrayList<Character>();
+        }
+        
+        //TODO
+        for (int i = stackInLines.size()-1; i >= 0; i--) {     // each line of the input.txt
+            for (int k = 2, j = 0; k < stackInLines.length; k+=4, j++) { //find each char in line
+                Character creates = stackInString.get(i).charAt(k);
                 if ( creates != ' ') {
-                    stackOfCrates[j].add(creates);
+                    this.stackOfCrates[j].add(creates);
                 }
             }
         }
     }
 
     public int[] convertInputProcedure(String line){
-        int[] procedureStep = new int[3];
-        //...procedure
-        return procedureStep;
+        int[] procedureSteps = new int[3];
+        // Replacing every non-digit number with a space(" ")
+        line = line.replaceAll("[^0-9]", " "); // regular expression
+        // Replace all the consecutive white spaces with a single space
+        line = line.replaceAll(" +", " ").trim();
+        String[] num = line.split(" ");
+        for (int i = 0; i < num.length; i++) {
+            procedureSteps[i] = Integer.parseInt(num[i]);
+        }
+        return procedureSteps;
     }
 
     public void rearrangementProcedure(int[] orders){
+        /*orders[0] => number of crates that will be moved
+        * orders[1] => from which stack it will be moved
+        * ordres[2] => to which stack will be moved
+        */
+        int fromStack = orders[1];
+        int toStack= orders[2];
 
+        for (int i = 0; i < orders[0]; i++) {
+            int lastIndex = this.stackOfCrates[fromStack].size()-1;
+            char cratesToMove = this.stackOfCrates[fromStack].get( lastIndex );
+            this.stackOfCrates[fromStack].remove(lastIndex);
+            this.stackOfCrates[toStack].add(cratesToMove);
+        }
     }
 
     public String readResultFromStack(){
         String result = "";
-        //...
+        
+        for (ArrayList<Character> stack : this.stackOfCrates) {
+            if (!stack.isEmpty()) {
+                result += stack.get(stack.size()-1);
+            }
+        }
+
         return result;
     }
 
