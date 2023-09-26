@@ -26,10 +26,8 @@ public class SupplyStacks {
 
             // read rearrangement procedure
             while ((line=br.readLine()) != null) {
-
                 rearrangementProcedure(convertInputProcedure(line));
             }
-
 
             return readResultFromStack();
         } catch (IOException e) {
@@ -50,14 +48,13 @@ public class SupplyStacks {
 
         // initializing Array of ArrayList
         this.stackOfCrates = new ArrayList[numOfStacks];
-        for (int i = 0; i < stackInLines.size(); i++) {
+        for (int i = 0; i < numOfStacks; i++) {
             this.stackOfCrates[i] = new ArrayList<Character>();
         }
-        
-        //TODO
+
         for (int i = stackInLines.size()-1; i >= 0; i--) {     // each line of the input.txt
-            for (int k = 2, j = 0; k < stackInLines.length; k+=4, j++) { //find each char in line
-                Character creates = stackInString.get(i).charAt(k);
+            for (int k = 1, j = 0; k < stackInLines.get(i).length(); k+=4, j++) { //importand character in line                 
+                Character creates = stackInLines.get(i).charAt(k); //find each char in line
                 if ( creates != ' ') {
                     this.stackOfCrates[j].add(creates);
                 }
@@ -83,8 +80,8 @@ public class SupplyStacks {
         * orders[1] => from which stack it will be moved
         * ordres[2] => to which stack will be moved
         */
-        int fromStack = orders[1];
-        int toStack= orders[2];
+        int fromStack = orders[1]-1;
+        int toStack= orders[2]-1;
 
         for (int i = 0; i < orders[0]; i++) {
             int lastIndex = this.stackOfCrates[fromStack].size()-1;
@@ -96,13 +93,9 @@ public class SupplyStacks {
 
     public String readResultFromStack(){
         String result = "";
-        
         for (ArrayList<Character> stack : this.stackOfCrates) {
-            if (!stack.isEmpty()) {
-                result += stack.get(stack.size()-1);
-            }
+            if (!stack.isEmpty()) result += stack.get(stack.size()-1);
         }
-
         return result;
     }
 
