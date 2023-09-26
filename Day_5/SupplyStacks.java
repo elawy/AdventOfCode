@@ -26,7 +26,8 @@ public class SupplyStacks {
 
             // read rearrangement procedure
             while ((line=br.readLine()) != null) {
-                rearrangementProcedure(convertInputProcedure(line));
+                //rearrangementProcedure_1(convertInputProcedure(line));
+                rearrangementProcedure_2(convertInputProcedure(line));
             }
 
             return readResultFromStack();
@@ -35,8 +36,6 @@ public class SupplyStacks {
         }
         return "";
     }
-
-    /*--------------------------------Part 1------------------------------------ */
 
     public void convertInputStack(ArrayList<String> stackInLines){
 
@@ -75,7 +74,17 @@ public class SupplyStacks {
         return procedureSteps;
     }
 
-    public void rearrangementProcedure(int[] orders){
+    public String readResultFromStack(){
+        String result = "";
+        for (ArrayList<Character> stack : this.stackOfCrates) {
+            if (!stack.isEmpty()) result += stack.get(stack.size()-1);
+        }
+        return result;
+    }
+
+    /*--------------------------------Part 1------------------------------------ */
+
+    public void rearrangementProcedure_1(int[] orders){
         /*orders[0] => number of crates that will be moved
         * orders[1] => from which stack it will be moved
         * ordres[2] => to which stack will be moved
@@ -91,14 +100,23 @@ public class SupplyStacks {
         }
     }
 
-    public String readResultFromStack(){
-        String result = "";
-        for (ArrayList<Character> stack : this.stackOfCrates) {
-            if (!stack.isEmpty()) result += stack.get(stack.size()-1);
+
+    /*--------------------------------Part 2------------------------------------ */
+
+        public void rearrangementProcedure_2(int[] orders){
+        /*orders[0] => number of crates that will be moved
+        * orders[1] => from which stack it will be moved
+        * ordres[2] => to which stack will be moved
+        */
+        int numToMove = orders[0];
+        int fromStack = orders[1]-1;
+        int toStack= orders[2]-1;
+
+        int index = this.stackOfCrates[fromStack].size() - numToMove;
+        for (int i = 0; i < numToMove; i++) {
+            char cratesToMove = this.stackOfCrates[fromStack].get( index );
+            this.stackOfCrates[fromStack].remove(index);
+            this.stackOfCrates[toStack].add(cratesToMove);
         }
-        return result;
     }
-
-/*--------------------------------Part 2------------------------------------ */
-
 }
