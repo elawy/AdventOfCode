@@ -3,6 +3,9 @@ package Day_6;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TuningTrouble {
     static String filePath = "Day_6/input.txt";
@@ -11,7 +14,7 @@ public class TuningTrouble {
 
     public TuningTrouble(){
     }
-    
+
     public int getResult(){
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))){
             boolean firstTime = true;
@@ -41,8 +44,12 @@ public class TuningTrouble {
     }
 
     public boolean detectMarker(){
-        //check if any char is double in array?
-        return true;
+        ArrayList<Character> temp = new ArrayList<Character>();
+        for (char i : this.marker){
+            if (temp.contains(i)) return true;
+            temp.add(i);
+        }
+        return false;
     }
     
 }
