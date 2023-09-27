@@ -7,7 +7,11 @@ import java.util.ArrayList;
 
 public class TuningTrouble {
     static String filePath = "Day_6/input.txt";
-    int markerLength = 4;
+    /*-------------Part_1 --------------------*/
+    //int markerLength = 4;
+    /*-------------Part_2 --------------------*/
+    int markerLength = 14;
+
     ArrayList<Character> marker = new ArrayList<Character>();
     int index = 0;
 
@@ -23,7 +27,7 @@ public class TuningTrouble {
                     for (int i = 0; i < markerLength; i++) {
                         this.marker.add(i, (char)br.read());
                     }
-                    index = 4;
+                    index = markerLength;
                     firstTime = false;
                 } else {
                     setCharacter((char)br.read());
@@ -46,13 +50,9 @@ public class TuningTrouble {
     public boolean detectMarker(){
         ArrayList<Character> temp = new ArrayList<Character>();
         for (char i : this.marker){
-            if (temp.contains(i)){
-                return false;
-            } else{ 
-                temp.add(i);
-            }
+            if (temp.contains(i)) return false;
+            temp.add(i);
         }
         return true;
     }
-    
 }
