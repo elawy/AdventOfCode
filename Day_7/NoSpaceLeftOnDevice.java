@@ -15,6 +15,7 @@ public class NoSpaceLeftOnDevice {
     public NoSpaceLeftOnDevice(){
     }
 
+
     public int getResult()throws IOException{
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         line = br.readLine();
@@ -25,8 +26,11 @@ public class NoSpaceLeftOnDevice {
         return findFoulder();
     }
 
+
+
     public int rekursionFunc(BufferedReader br, String name, int size)throws IOException{
 
+        if (foulders.containsKey(name))name += "_sub";
         this.foulders.put(name, size);   //add foulder to map
         int newSize;
          // it is the line "ls" -> we don't need it, TODO could we jump over the line?
@@ -55,10 +59,13 @@ public class NoSpaceLeftOnDevice {
         int sum = 0;
 
         for (int size  : this.foulders.values()) {
-            if (size <= 100000) sum += size;
+            if (size <= 100000){
+                sum += size;
+            }
         }
         return sum;
     }
+
 
     public static boolean isNumeric(String str) { 
         try {  
