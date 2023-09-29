@@ -1,7 +1,7 @@
 package Day_5;
 
 
-public class main {
+public class MainClass {
     public static void main(String[] args){
         SupplyStacks obj = new SupplyStacks();
         System.out.println(obj.getResult());

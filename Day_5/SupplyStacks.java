@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class SupplyStacks {
     static String filePath = "Day_5/input.txt";
-    ArrayList<Character>[] stackOfCrates;
+    private ArrayList<ArrayList<Character>> stackOfCrates;
 
     public SupplyStacks(){
 
@@ -46,16 +46,16 @@ public class SupplyStacks {
         int numOfStacks = Integer.parseInt(lastLine.substring(lastLine.length() - 1));
 
         // initializing Array of ArrayList
-        this.stackOfCrates = new ArrayList[numOfStacks];
+        this.stackOfCrates = new ArrayList<>(numOfStacks);
         for (int i = 0; i < numOfStacks; i++) {
-            this.stackOfCrates[i] = new ArrayList<Character>();
+            this.stackOfCrates.add( new ArrayList<Character>() );
         }
 
         for (int i = stackInLines.size()-1; i >= 0; i--) {     // each line of the input.txt
             for (int k = 1, j = 0; k < stackInLines.get(i).length(); k+=4, j++) { //importand character in line                 
                 Character creates = stackInLines.get(i).charAt(k); //find each char in line
                 if ( creates != ' ') {
-                    this.stackOfCrates[j].add(creates);
+                    this.stackOfCrates.get(j).add(creates);
                 }
             }
         }
@@ -93,10 +93,11 @@ public class SupplyStacks {
         int toStack= orders[2]-1;
 
         for (int i = 0; i < orders[0]; i++) {
-            int lastIndex = this.stackOfCrates[fromStack].size()-1;
-            char cratesToMove = this.stackOfCrates[fromStack].get( lastIndex );
-            this.stackOfCrates[fromStack].remove(lastIndex);
-            this.stackOfCrates[toStack].add(cratesToMove);
+
+            int lastIndex = this.stackOfCrates.get(fromStack).size()-1;
+            char cratesToMove = this.stackOfCrates.get(fromStack).get( lastIndex );
+            this.stackOfCrates.get(fromStack).remove(lastIndex);
+            this.stackOfCrates.get(toStack).add(cratesToMove);
         }
     }
 
@@ -112,11 +113,11 @@ public class SupplyStacks {
         int fromStack = orders[1]-1;
         int toStack= orders[2]-1;
 
-        int index = this.stackOfCrates[fromStack].size() - numToMove;
+        int index = this.stackOfCrates.get(fromStack).size() - numToMove;
         for (int i = 0; i < numToMove; i++) {
-            char cratesToMove = this.stackOfCrates[fromStack].get( index );
-            this.stackOfCrates[fromStack].remove(index);
-            this.stackOfCrates[toStack].add(cratesToMove);
+            char cratesToMove = this.stackOfCrates.get(fromStack).get( index );
+            this.stackOfCrates.get(fromStack).remove(index);
+            this.stackOfCrates.get(toStack).add(cratesToMove);
         }
     }
 }
