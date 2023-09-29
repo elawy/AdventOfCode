@@ -1,7 +1,7 @@
 package Day_6;
 
 
-public class main {
+public class MainClass {
     public static void main(String[] args){
         TuningTrouble obj = new TuningTrouble();
         System.out.println(obj.getResult());

@@ -2,7 +2,7 @@ package Day_7;
 
 import java.io.IOException;
 
-public class main {
+public class MainClass {
     public static void main(String[] args){
         NoSpaceLeftOnDevice obj = new NoSpaceLeftOnDevice();
         try {
