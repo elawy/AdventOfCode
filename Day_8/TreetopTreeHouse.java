@@ -34,8 +34,57 @@ public class TreetopTreeHouse {
 
     public int countInteriorVisibles(){
         int interiorVisible = 0;
-        //TODO
+        for (int i = 1; i < this.treeMap.size()-1; i++) {
+            for (int j = 1; j < this.treeMap.get(i).size()-1; j++) {
+                if (chekCondition(this.treeMap.get(i).get(j), i, j)) {
+                    interiorVisible++;
+                }
+            }
+            
+        }
         return interiorVisible;
+    }
+
+    public boolean chekCondition(int value1, int row1, int colums1){
+        int countFalse = 0;
+
+        // for top line
+        for (int row2 = 0; row2 < row1; row2++) {
+            if (this.treeMap.get(row2).get(colums1) >= value1) {
+                countFalse++;
+                break;
+            }
+        }
+
+        // for down line
+        for (int row2 = this.treeMap.size()-1; row2 > row1; row2--) {
+            if (this.treeMap.get(row2).get(colums1) >= value1) {
+                countFalse++;
+                break;
+            }
+        }
+
+        // for left line     
+        for (int colums2 = 0; colums2 < colums1; colums2++) {
+            if (this.treeMap.get(row1).get(colums2) >= value1) {
+                countFalse++;
+                break;
+            }
+        }
+
+        // for right line     
+        for (int colums2 = this.treeMap.get(row1).size()-1; colums2 > colums1; colums2--) {
+            if (this.treeMap.get(row1).get(colums2) >= value1) {
+                countFalse++;
+                break;
+            }
+        }
+        
+        if (countFalse == 4 ) {
+            return false;
+        } else {
+            return true;
+        }
     }
     public int countEdgeTrees(){
         int edgeTrees = 0;
