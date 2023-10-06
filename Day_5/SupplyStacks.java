@@ -45,7 +45,7 @@ public class SupplyStacks {
         stackInLines.remove(lastIndex);
         int numOfStacks = Integer.parseInt(lastLine.substring(lastLine.length() - 1));
 
-        // initializing Array of ArrayList
+        // initializing ArrayList of ArrayList
         this.stackOfCrates = new ArrayList<>(numOfStacks);
         for (int i = 0; i < numOfStacks; i++) {
             this.stackOfCrates.add( new ArrayList<Character>() );
