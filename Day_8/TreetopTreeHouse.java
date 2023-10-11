@@ -45,7 +45,7 @@ public class TreetopTreeHouse {
                 }
                 */
                 //Part_2
-                int newValue = bestSpot();
+                int newValue = bestSpot(this.treeMap.get(i).get(j), i, j);
                 if ( returnValue < newValue) {
                     returnValue = newValue;
                 }
@@ -109,8 +109,47 @@ public class TreetopTreeHouse {
 
 
     /*----------------------Part_2----------------------------- */
-    public int bestSpot(){
-        return 0;
+    public int bestSpot(int value1, int row1, int colums1){
+
+        int scenicScore = 1;
+
+        // for top line
+        for (int row2 = row1-1; row2 >= 0; row2--) {
+            if (this.treeMap.get(row2).get(colums1) >= value1
+                    || row2 == 0) {
+                scenicScore *= Math.abs(row1-row2);
+                break;
+            }
+        }
+
+        // for down line
+        for (int row2 = row1+1; row2 <= this.treeMap.size()-1; row2++) {
+            if (this.treeMap.get(row2).get(colums1) >= value1
+                    || row2 == this.treeMap.size()-1) {
+                scenicScore *= Math.abs(row1-row2);
+                break;
+            }
+        }
+
+        // for left line     
+        for (int colums2 = colums1-1; colums2 >= 0; colums2--) {
+            if (this.treeMap.get(row1).get(colums2) >= value1
+                || colums2 == 0) {
+                scenicScore *= Math.abs(colums1 - colums2);
+                break;
+            }
+        }
+
+        // for right line     
+        for (int colums2 = colums1+1 ; colums2 <= this.treeMap.get(row1).size()-1; colums2++) {
+            if (this.treeMap.get(row1).get(colums2) >= value1
+                || colums2 == this.treeMap.get(row1).size()-1 ) {
+                scenicScore *= Math.abs(colums1 - colums2);
+                break;
+            }
+        }
+        
+        return scenicScore;
     }
 
     public void toPrint(){
