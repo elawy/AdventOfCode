@@ -12,7 +12,9 @@ public class TreetopTreeHouse {
     public int getResult(){
         createMap();
         //toPrint();
-        return countEdgeTrees() + countInteriorVisibles();
+
+        //return countEdgeTrees() + checkEchInnerTree();        //Part_1
+        return checkEchInnerTree();
     }
 
     public void createMap(){
@@ -32,20 +34,30 @@ public class TreetopTreeHouse {
         }
     }
 
-    public int countInteriorVisibles(){
-        int interiorVisible = 0;
+    public int checkEchInnerTree(){
+        int returnValue = 0;
         for (int i = 1; i < this.treeMap.size()-1; i++) {
             for (int j = 1; j < this.treeMap.get(i).size()-1; j++) {
-                if (chekCondition(this.treeMap.get(i).get(j), i, j)) {
-                    interiorVisible++;
+                /*
+                // Part_1
+                if (visibilFromOutside(this.treeMap.get(i).get(j), i, j)) {
+                    returnValue++;
                 }
-            }
-            
+                */
+                //Part_2
+                int newValue = bestSpot();
+                if ( returnValue < newValue) {
+                    returnValue = newValue;
+                }
+
+            } 
         }
-        return interiorVisible;
+        return returnValue;
     }
 
-    public boolean chekCondition(int value1, int row1, int colums1){
+    /*----------------------Part_1----------------------------- */
+    // is the tree the highest in the horizontal and vertical lines?
+    public boolean visibilFromOutside(int value1, int row1, int colums1){
         int countFalse = 0;
 
         // for top line
@@ -86,12 +98,19 @@ public class TreetopTreeHouse {
             return true;
         }
     }
+
     public int countEdgeTrees(){
         int edgeTrees = 0;
         int rows = this.treeMap.size();
         int colums = this.treeMap.get(0).size();
         edgeTrees = 2*rows + 2* (colums -2);
         return edgeTrees;
+    }
+
+
+    /*----------------------Part_2----------------------------- */
+    public int bestSpot(){
+        return 0;
     }
 
     public void toPrint(){
