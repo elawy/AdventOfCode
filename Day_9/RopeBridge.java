@@ -9,8 +9,8 @@ import java.util.Set;
 public class RopeBridge {
     static String filePath = "Day_9/input.txt";
     Set<Position> visitedPositions = new HashSet<Position>();
-    
-    
+    Position head = new Position(0,0);
+    Position tail = new Position(0,0);
     
     public int getResult(){
 
@@ -18,7 +18,7 @@ public class RopeBridge {
             String line;
 
             while ( (line = br.readLine()) != null) {
-                motion(line.split(" "));
+                motionLine(line.split(" "));
             }
 
             return visitedPositions.size();
@@ -30,8 +30,10 @@ public class RopeBridge {
         return 0;
     }
 
-    public void motion(String[] input){
-
+    public void motionLine(String[] input){
+        for (int i = 0; i < Integer.parseInt(input[1]); i++) {
+            
+        }
     }
 
 
